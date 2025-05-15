@@ -16,7 +16,7 @@ export const editNotification = (req, res) => {
   });
 };
 
-export const deletenNotification = (req, res) => {
+export const deleteNotification = (req, res) => {
   res.json({
     message: "delete notification",
   });
