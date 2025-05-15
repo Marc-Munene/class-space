@@ -5,8 +5,16 @@ const bookingSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "user" },
     room: { type: Schema.Types.ObjectId, ref: "room" },
     date: { type: Date, required: true },
-    startTime: { type: Date, required: true },
-    endTime: { type: Date, required: true },
+    startTime: {
+      type: String,
+      required: true,
+      match: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, // Ensures "09:00" or "23:59" format
+    },
+    endTime: {
+      type: String,
+      required: true,
+      match: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, // Ensures "09:00" or "23:59" format
+    },
     purpose: { type: String, required: true },
     status: {
       type: String,
