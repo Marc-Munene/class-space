@@ -8,6 +8,8 @@ import { getHome } from "./controllers/home.js";
 
 import { userRouter } from "./routes/userRoute.js";
 
+import { buildingRouter } from "./routes/buildingRoute.js";
+
 const app = express();
 
 //Database connect
@@ -19,7 +21,7 @@ const PORT = process.env.PORT;
 app.get("/", getHome);
 
 //Routing
-app.use("/api", userRouter);
+app.use("/api", userRouter, buildingRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
