@@ -13,7 +13,7 @@ const bookingSchema = new Schema(
     endTime: {
       type: String,
       required: true,
-      match: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, // Ensures "09:00" or "23:59" format
+      match: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
     },
     purpose: { type: String, required: true },
     status: {
