@@ -6,7 +6,7 @@ const roomSchema = new Schema({
   capacity: { type: Number, required: true },
   status: {
     type: String,
-    enum: ["booked, in-progress, vacant"],
+    enum: ["booked", "in-progress", "vacant"],
     default: "vacant",
   },
   isBooked: { type: Boolean, default: "false" },
