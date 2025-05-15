@@ -9,6 +9,7 @@ import { buildingRouter } from "./routes/buildingRoute.js";
 import { roomRouter } from "./routes/roomRoute.js";
 import { bookingRouter } from "./routes/bookingRoute.js";
 import { notificationRouter } from "./routes/notificationRoute.js";
+import { authRouter } from "./routes/authRoute.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/", getHome);
 //Routing
 app.use(
   "/api",
+  authRouter,
   userRouter,
   buildingRouter,
   roomRouter,
