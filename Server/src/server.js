@@ -7,6 +7,7 @@ import { getHome } from "./controllers/home.js";
 import { userRouter } from "./routes/userRoute.js";
 import { buildingRouter } from "./routes/buildingRoute.js";
 import { roomRouter } from "./routes/roomRoute.js";
+import { bookingRouter } from "./routes/bookingRoute.js";
 
 const app = express();
 
@@ -19,7 +20,7 @@ const PORT = process.env.PORT;
 app.get("/", getHome);
 
 //Routing
-app.use("/api", userRouter, buildingRouter, roomRouter);
+app.use("/api", userRouter, buildingRouter, roomRouter, bookingRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
