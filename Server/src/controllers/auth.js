@@ -8,9 +8,13 @@ export const signUp = async (req, res) => {
 
     const harshedPassword = await hash(password, 10);
 
+    const trimmedName = name.trim();
+
+    const trimmedEmail = email.trim().toLowerCase();
+
     const userData = {
-      name,
-      email,
+      name: trimmedName,
+      email: trimmedEmail,
       password: harshedPassword,
     };
 
@@ -34,10 +38,12 @@ export const signUp = async (req, res) => {
 
 //LogIn
 export const login = async (req, res) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
+
+  const trimmedEmail = email.trim().toLowerCase();
 
   try {
-    const user = await User.findOne({ name });
+    const user = await User.findOne({ email: trimmedEmail });
 
     if (!user) throw new Error("Invalid credentials!");
 

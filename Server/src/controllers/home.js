@@ -1,5 +1,5 @@
 export const getHome = (req, res) => {
   res.json({
-    message: "Home route",
+    message: "Home route, class space",
   });
 };

@@ -16,6 +16,9 @@ const app = express();
 //Database connect
 connectDB();
 
+//middleware
+app.use(express.json());
+
 const PORT = process.env.PORT;
 
 //home route
