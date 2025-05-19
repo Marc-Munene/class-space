@@ -9,7 +9,7 @@ import {
 const buildingRouter = Router();
 
 buildingRouter
-  .route("/building")
+  .route("/buildings")
   .get(getBuildings)
   .post(addBuildings)
   .put(editBuildings)
