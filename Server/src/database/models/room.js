@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const roomSchema = new Schema({
-  roomName: { type: String, required: true },
+  roomName: { type: String, required: true, unique: true },
   building: { type: Schema.Types.ObjectId, ref: "building" },
   capacity: { type: Number, required: true },
   status: {
