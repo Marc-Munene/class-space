@@ -1,5 +1,6 @@
 import { BookCheck, Building2, LayoutDashboard, LogOut } from "lucide-react";
 import { useState } from "react";
+import { NavLink } from "react-router";
 
 const SideBar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -34,34 +35,34 @@ const SideBar = () => {
         } transition-transform duration-300 ease-in-out shadow-lg md:shadow-none`}
       >
         {/* dashboard link */}
-        <button
-          to={"/"}
+        <NavLink
+          to={"/dashboard"}
           className="flex items-center p-2 gap-2 w-full  hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
           onClick={closeMobileMenu}
         >
           <LayoutDashboard size={18} />
           <span className="text-base">Dashboard</span>
-        </button>
+        </NavLink>
 
         {/* buildings */}
-        <button
+        <NavLink
           to={"/buildings"}
           className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
           onClick={closeMobileMenu}
         >
           <Building2 size={18} />
           <span className="text-base">Buildings</span>
-        </button>
+        </NavLink>
 
         {/* bookings link */}
-        <button
+        <NavLink
           to={"/bookings"}
           className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer "
           onClick={closeMobileMenu}
         >
           <BookCheck size={18} />
           <span className="text-base">Bookings</span>
-        </button>
+        </NavLink>
 
         {/* booked link */}
         {/* <button
