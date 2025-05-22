@@ -14,8 +14,9 @@ const App = () => {
       <div className="flex flex-col md:flex-row text-primary mt-5 md:mt-0">
         <SideBar />
 
-        {/* <Classes /> */}
-        <Outlet />
+        <div className="mx-auto ">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
