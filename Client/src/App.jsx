@@ -1,7 +1,11 @@
+import { LoginPage } from "./pages/Auth/loginPage";
+
 const App = () => {
-  return <div>
-    
-  </div>;
+  return (
+    <>
+      <LoginPage />
+    </>
+  );
 };
 
 export { App };
