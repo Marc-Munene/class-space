@@ -1,12 +1,15 @@
 // import { LoginPage } from "./pages/Auth/loginPage";
 
-import { SignUp } from "./pages/Auth/SignUp";
+import { SideBar } from "./components/SideBar";
+
+// import { SignUp } from "./pages/Auth/SignUp";
 
 const App = () => {
   return (
     <>
       {/* <LoginPage /> */}
-      <SignUp />
+      {/* <SignUp /> */}
+      <SideBar />
     </>
   );
 };
