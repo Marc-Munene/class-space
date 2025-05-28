@@ -2,9 +2,17 @@ import { StatCard } from "../../components/StatCard";
 import { startCarditems } from "../../../data";
 import { useState } from "react";
 import { Funnel } from "lucide-react";
+import { Modal } from "../../components/Modal";
+import { BookingForm } from "../../Forms/BookingForm";
 
 const DashBoard = () => {
   const [search, setSearch] = useState("");
+
+  const [modal, setModal] = useState(false);
+
+  const closeModal = () => {
+    setModal(false);
+  };
   return (
     <>
       {/* Stat Cards */}
@@ -116,7 +124,10 @@ const DashBoard = () => {
                 <td className="px-4 py-3  text-center">80</td>
                 <td className="px-4 py-3  text-center">Vacant</td>
                 <td className="px-4 py-3  text-center">
-                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
+                  <button
+                    className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
+                    onClick={() => setModal(true)}
+                  >
                     BOOK
                   </button>
                 </td>
@@ -125,6 +136,10 @@ const DashBoard = () => {
           </table>
         </div>
       </div>
+
+      <Modal openModal={modal} closeModal={closeModal}>
+        <BookingForm />
+      </Modal>
     </>
   );
 };
