@@ -8,6 +8,12 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("signing up ...");
+  };
+
   return (
     <div
       className="min-h-screen flex items-center justify-center text-base"
@@ -20,7 +26,7 @@ const SignUp = () => {
       }}
     >
       <form
-        //   onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="bg-opacity-50 backdrop-blur-sm rounded-xl shadow-xl py-3 px-5 w-full max-w-sm"
       >
         <div className="text-center mb-3">

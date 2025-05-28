@@ -17,7 +17,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen  flex items-center justify-center">
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className=" bg-opacity-50 backdrop-blur-sm rounded-xl shadow-xl p-8 w-full max-w-sm"
       >
         <div className="text-center mb-6">
