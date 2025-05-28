@@ -14,8 +14,11 @@ const App = () => {
       <div className="flex flex-col md:flex-row text-primary mt-5 md:mt-0">
         <SideBar />
 
-        <div className="mx-auto ">
-          <Outlet />
+        {/* Main content area - now takes remaining width and centers its children */}
+        <div className="flex-1 overflow-auto">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

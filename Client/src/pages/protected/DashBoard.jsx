@@ -6,8 +6,9 @@ import { Funnel } from "lucide-react";
 const DashBoard = () => {
   const [search, setSearch] = useState("");
   return (
-    <div>
-      <div className="flex gap-6 p-6 ">
+    <>
+      {/* Stat Cards */}
+      <div className="flex flex-wrap justify-center gap-6 p-6">
         {startCarditems.map((elem, i) => (
           <div
             key={i}
@@ -23,12 +24,14 @@ const DashBoard = () => {
         ))}
       </div>
 
-      <div className="mt-5 flex justify-center text-4xl font-semibold">
-        <h1 className="text-NavyBlue">Find Vacant Rooms</h1>
+      <div className="mt-5 flex justify-center">
+        <h1 className="text-NavyBlue text-4xl font-semibold">
+          Find Vacant Rooms
+        </h1>
       </div>
 
       {/* search bar */}
-      <div className="flex items-center justify-center mt-5 gap-3 ">
+      <div className="flex items-center justify-center mt-5 gap-3 min-h-[60px]">
         <input
           type="text"
           placeholder="Search Items"
@@ -43,74 +46,86 @@ const DashBoard = () => {
       </div>
 
       {/* tables */}
-      <div className="overflow-x-auto rounded-lg shadow-sm mt-5">
-        <table className="w-full text-left text-sm sm:text-base">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                #
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                ROOM
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                BUILDING
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                CAPACITY
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                STATUS
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                ACTION
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Hardcoded table details */}
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">1</td>
-              <td className="py-2 sm:py-3 text-center">SPA 101</td>
-              <td className="py-2 sm:py-3 text-center">SPA</td>
-              <td className="py-2 sm:py-3 text-center">65</td>
-              <td className="py-2 sm:py-3 text-center">Vacant</td>
-              <td className="py-2 sm:py-3 text-center">
-                <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                  BOOK
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">2</td>
-              <td className="py-2 sm:py-3 text-center">CLB 001</td>
-              <td className="py-2 sm:py-3 text-center">CLB</td>
-              <td className="py-2 sm:py-3 text-center">70</td>
-              <td className="py-2 sm:py-3 text-center">Vacant</td>
-              <td className="py-2 sm:py-3 text-center">
-                {" "}
-                <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                  BOOK
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">3</td>
-              <td className="py-2 sm:py-3 text-center">NCLB 011</td>
-              <td className="py-2 sm:py-3 text-center">NCLB</td>
-              <td className="py-2 sm:py-3 text-center">34</td>
-              <td className="py-2 sm:py-3 text-center">Vacant</td>
-              <td className="py-2 sm:py-3 text-center">
-                {" "}
-                <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                  BOOK
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="mt-5">
+        <div className="overflow-x-auto rounded-lg shadow-sm ">
+          <table className="w-full text-left text-sm sm:text-base">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  #
+                </th>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  ROOM
+                </th>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  BUILDING
+                </th>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  CAPACITY
+                </th>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  STATUS
+                </th>
+                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
+                  ACTION
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Hardcoded table details */}
+              <tr className="border-b border-gray-300">
+                <td className="px-4 py-3 text-center">1</td>
+                <td className="px-4 py-3 text-center">SPA 101</td>
+                <td className="px-4 py-3 text-center">SPA</td>
+                <td className="px-4 py-3 text-center">65</td>
+                <td className="px-4 py-3 text-center">Vacant</td>
+                <td className="px-4 py-3 text-center">
+                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
+                    BOOK
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-b border-gray-300">
+                <td className="px-4 py-3  text-center">2</td>
+                <td className="px-4 py-3  text-center">CLB 001</td>
+                <td className="px-4 py-3  text-center">CLB</td>
+                <td className="px-4 py-3  text-center">70</td>
+                <td className="px-4 py-3  text-center">Vacant</td>
+                <td className="px-4 py-3  text-center">
+                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
+                    BOOK
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-b border-gray-300">
+                <td className="px-4 py-3  text-center">3</td>
+                <td className="px-4 py-3  text-center">NCLB 011</td>
+                <td className="px-4 py-3  text-center">NCLB</td>
+                <td className="px-4 py-3  text-center">34</td>
+                <td className="px-4 py-3  text-center">Vacant</td>
+                <td className="px-4 py-3  text-center">
+                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
+                    BOOK
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-b border-gray-300">
+                <td className="px-4 py-3  text-center">4</td>
+                <td className="px-4 py-3  text-center">NCLB 004</td>
+                <td className="px-4 py-3  text-center">NCLB</td>
+                <td className="px-4 py-3  text-center">80</td>
+                <td className="px-4 py-3  text-center">Vacant</td>
+                <td className="px-4 py-3  text-center">
+                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
+                    BOOK
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
