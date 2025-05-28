@@ -12,21 +12,13 @@ const SideBar = () => {
     <div className="w-[15%] px-1">
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden fixed text-base top-4 left-4 z-50 p-2 bg-primary text-white rounded"
+        className="md:hidden fixed text-base top-4 left-4 z-50 p-2 bg-primary text-black rounded"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         ☰
       </button>
       {/* Navigation Sidebar - Hidden on mobile unless toggled */}
-      {/* logo link */}
-      <button to={"/"} className="p-4" onClick={closeMobileMenu}>
-        <img
-          src="/Class-space-nobg.png"
-          alt="Classify Logo"
-          className="mx-auto cursor-pointer"
-          width={160}
-        />
-      </button>
+
       <nav
         className={`aside bg-white fixed space-y-2 md:static p-3  inset-y-0 left-0 z-40 w-full  transform ${
           showMobileMenu
@@ -34,6 +26,15 @@ const SideBar = () => {
             : "-translate-x-full md:translate-x-0"
         } transition-transform duration-300 ease-in-out shadow-lg md:shadow-none`}
       >
+        {/* logo link */}
+        <button to={"/"} className="p-4" onClick={closeMobileMenu}>
+          <img
+            src="/Class-space-nobg.png"
+            alt="Classify Logo"
+            className="mx-auto cursor-pointer"
+            width={160}
+          />
+        </button>
         {/* dashboard link */}
         <NavLink
           to={"/dashboard"}
@@ -64,47 +65,15 @@ const SideBar = () => {
           <span className="text-base">Buildings</span>
         </NavLink>
 
-        {/* booked link */}
-        {/* <button
-          to={"/booked"}
-          className="flex items-center justify-around py-3 hover:bg-gray-200 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] "
+        {/* logout */}
+        <button
+          className="flex items-center justify-center  gap-2 rounded-full bg-red-100 w-full py-2 mt-5 hover:bg-red-200 text-red-500 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
           onClick={closeMobileMenu}
         >
-          <span className="text-base">Bookings</span>
-          <FaBookReader  />
-        </button> */}
-
-        {/*  history link*/}
-
-        {/* Navigation Items */}
-        {/* {[
-          { text: "Classes", icon: <SiGoogleclassroom size={24} /> },
-          { text: "Bookings", icon: <CiBookmarkCheck size={24} /> },
-          { text: "Booked", icon: <FaBookReader size={24} /> },
-          { text: "History", icon: <FaHistory size={24} /> },
-          { text: "Logout", icon: <CgLogOut size={24} />, isLast: true },
-        ].map((item, index) => (
-          <div
-            key={index}
-            className={`flex items-center p-4 hover:bg-gray-200 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] rounded-lg  ${
-              item.isLast ? "mt-8 text-red-500" : ""
-            }`}
-          >
-            <span className="text-lg md:text-xl flex-grow">
-              {item.text}
-            </span>
-            {item.icon}
-          </div>
-        ))} */}
+          <LogOut size={18} />
+          <span className="font-bold text-sm">Logout</span>
+        </button>
       </nav>
-      {/* logout */}
-      <button
-        className="flex items-center justify-center  gap-2 rounded-full bg-red-100 w-full py-2 mt-5 hover:bg-red-200 text-red-500 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
-        onClick={closeMobileMenu}
-      >
-        <LogOut size={18} />
-        <span className="font-bold text-sm">Logout</span>
-      </button>
     </div>
   );
 };
