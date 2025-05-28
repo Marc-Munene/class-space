@@ -5,3 +5,10 @@
     font-family: "Montserrat", sans-serif;
   }
 }
+
+@theme {
+  --color-NavyBlue: #003b6f;
+  --color-EmeraldTeal: #26b29c;
+  --color-TealGreen: #00c6a3;
+  --color-DeepBlue: #004e92;
+}
