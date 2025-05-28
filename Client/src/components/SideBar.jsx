@@ -44,16 +44,6 @@ const SideBar = () => {
           <span className="text-base">Dashboard</span>
         </NavLink>
 
-        {/* buildings */}
-        <NavLink
-          to={"/buildings"}
-          className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
-          onClick={closeMobileMenu}
-        >
-          <Building2 size={18} />
-          <span className="text-base">Buildings</span>
-        </NavLink>
-
         {/* bookings link */}
         <NavLink
           to={"/bookings"}
@@ -62,6 +52,16 @@ const SideBar = () => {
         >
           <BookCheck size={18} />
           <span className="text-base">Bookings</span>
+        </NavLink>
+
+        {/* buildings */}
+        <NavLink
+          to={"/buildings"}
+          className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
+          onClick={closeMobileMenu}
+        >
+          <Building2 size={18} />
+          <span className="text-base">Buildings</span>
         </NavLink>
 
         {/* booked link */}
