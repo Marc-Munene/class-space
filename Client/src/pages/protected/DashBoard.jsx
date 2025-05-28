@@ -56,27 +56,15 @@ const DashBoard = () => {
       {/* tables */}
       <div className="mt-5">
         <div className="overflow-x-auto rounded-lg shadow-sm ">
-          <table className="w-full text-left text-sm sm:text-base">
+          <table className="w-full text-left text-sm ">
             <thead className="bg-gray-200">
               <tr>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  #
-                </th>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  ROOM
-                </th>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  BUILDING
-                </th>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  CAPACITY
-                </th>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  STATUS
-                </th>
-                <th className="px-4 py-3 text-center text-xs sm:text-sm md:text-base">
-                  ACTION
-                </th>
+                <th className="px-4 py-3 text-center">#</th>
+                <th className="px-4 py-3 text-center">ROOM</th>
+                <th className="px-4 py-3 text-center">BUILDING</th>
+                <th className="px-4 py-3 text-center">CAPACITY</th>
+                <th className="px-4 py-3 text-center">STATUS</th>
+                <th className="px-4 py-3 text-center">ACTION</th>
               </tr>
             </thead>
             <tbody>
