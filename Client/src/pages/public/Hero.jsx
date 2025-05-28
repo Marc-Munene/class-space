@@ -15,7 +15,7 @@ const Hero = () => {
         <Link to={"/login"}>
           <button
             to={"/login"}
-            className="bg-white text-[#004e92] hover:bg-[#e0f7f4] font-semibold px-6 py-3 rounded-2xl transition shadow-lg transform transform-fill duration-300 ease-in-out hover:scale-[1.06]"
+            className="bg-white text-[#004e92] hover:bg-[#e0f7f4] font-semibold px-6 py-3 rounded-2xl transition shadow-lg transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
           >
             Get Started
           </button>

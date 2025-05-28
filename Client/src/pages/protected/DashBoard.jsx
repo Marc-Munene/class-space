@@ -1,59 +1,39 @@
-import { BarChart3, Construction, DoorClosed, DoorOpen } from "lucide-react";
 import { StatCard } from "../../components/StatCard";
+import { startCarditems } from "../../../data";
+import { useState } from "react";
+import { Funnel } from "lucide-react";
 
 const DashBoard = () => {
-  const startCarditems = [
-    {
-      title: "Total Rooms",
-      value: 42,
-      icon: BarChart3,
-      color: "border-blue-500",
-    },
-    {
-      title: "Vacant Rooms",
-      value: 12,
-      icon: DoorOpen,
-      color: "border-teal-500",
-    },
-    {
-      title: "Booked Rooms",
-      value: 15,
-      icon: DoorClosed,
-      color: "border-blue-500",
-    },
-    {
-      title: "Under-Maintance",
-      value: 0,
-      icon: Construction,
-      color: "border-red-500",
-    },
-  ];
-
+  const [search, setSearch] = useState("");
   return (
     <div>
-      <div className="flex gap-6 p-6">
+      <div className="flex gap-6 p-6 ">
         {startCarditems.map((elem, i) => (
-          <StatCard
-            key={i}
-            title={elem.title}
-            value={elem.value}
-            icon={elem.icon}
-            color={elem.color}
-          />
+          <div className="transform transform-fill duration-300 ease-in-out hover:scale-[1.06]">
+            <StatCard
+              key={i}
+              title={elem.title}
+              value={elem.value}
+              icon={elem.icon}
+              color={elem.color}
+            />
+          </div>
         ))}
+      </div>
 
-        {/* <StatCard
-          title="Total Classrooms"
-          value={42}
-          icon={BarChart3}
-          color="border-blue-500"
+      {/* search bar */}
+      <div className="flex items-center justify-center mt-5 gap-3 ">
+        <input
+          type="text"
+          placeholder="Search Items"
+          className=" border border-gray-300 rounded-md w-[35%] p-2 text-sm"
+          autoFocus
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <StatCard
-          title="Vacant Rooms"
-          value={16}
-          icon={DoorOpen}
-          color="border-teal-500"
-        /> */}
+        <span className="flex items-center cursor-pointer">
+          <Funnel size={20} />
+        </span>
       </div>
     </div>
   );
