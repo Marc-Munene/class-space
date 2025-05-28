@@ -6,21 +6,13 @@ const Bookings = () => {
       </div>
 
       <div className="overflow-x-auto rounded-lg shadow-sm mt-5">
-        <table className="w-full text-left text-sm sm:text-base">
+        <table className="w-full text-left text-sm">
           <thead className="bg-gray-200">
             <tr>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                #
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                ROOM
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                BUILDING
-              </th>
-              <th className="p-2 sm:p-3 text-center text-xs sm:text-sm md:text-base">
-                Action
-              </th>
+              <th className="p-2 sm:p-3 text-center">#</th>
+              <th className="p-2 sm:p-3 text-center">ROOM</th>
+              <th className="p-2 sm:p-3 text-center">BUILDING</th>
+              <th className="p-2 sm:p-3 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
