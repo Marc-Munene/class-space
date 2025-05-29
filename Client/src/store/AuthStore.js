@@ -23,7 +23,7 @@ const useAuthStore = create((set) => ({
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log(data);
+        // console.log(data);
 
         set({ user: data, isLoggedIn: true });
         return true;
