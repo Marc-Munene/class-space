@@ -14,7 +14,7 @@ const Bookings = () => {
       </div>
 
       <div className="overflow-x-auto rounded-lg shadow-sm mt-5">
-        <table className="w-full text-left text-sm">
+        <table className="w-full text-left text-base">
           <thead className="bg-gray-200">
             <tr>
               <th className="p-2 sm:p-3 text-center">#</th>

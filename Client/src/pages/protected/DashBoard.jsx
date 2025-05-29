@@ -1,29 +1,50 @@
 import { StatCard } from "../../components/StatCard";
 import { startCarditems } from "../../../data";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Funnel } from "lucide-react";
 import { Modal } from "../../components/Modal";
 import { BookingForm } from "../../Forms/BookingForm";
 import { useRoomStore } from "../../store/RoomStore";
+import debounce from "debounce";
 
 const DashBoard = () => {
-  const [search, setSearch] = useState("");
+  const [searchItem, setSearchItem] = useState("");
+  const [filteredRooms, setFilteredRooms] = useState([]);
   const [modal, setModal] = useState(false);
-
   const [selectedRoom, setSelectedRoom] = useState("");
-  // const [selectedBuilding, setSelectedBuilding] = useState("");
 
   const { roomData, rooms } = useRoomStore();
-
-  const BookRoomClick = (element) => {
-    setSelectedRoom(element);
-    // setSelectedBuilding(element.building._id);
-    setModal(true);
-  };
 
   useEffect(() => {
     roomData();
   }, [roomData]);
+
+  // Initialize filteredRooms with all rooms
+  useEffect(() => {
+    setFilteredRooms(rooms);
+  }, [rooms]);
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((term) => {
+        const filtered = rooms.filter((room) =>
+          room.roomName.toLowerCase().includes(term.toLowerCase())
+        );
+        setFilteredRooms(filtered);
+      }, 500),
+    [rooms]
+  );
+
+  const handleSearchChange = (e) => {
+    const term = e.target.value;
+    setSearchItem(term);
+    debouncedSearch(term);
+  };
+
+  const BookRoomClick = (element) => {
+    setSelectedRoom(element);
+    setModal(true);
+  };
 
   const closeModal = () => {
     setModal(false);
@@ -60,8 +81,8 @@ const DashBoard = () => {
           placeholder="Search Items"
           className=" border border-gray-300 rounded-md w-[35%] p-2 text-sm"
           autoFocus
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchItem}
+          onChange={handleSearchChange}
         />
         <span className="flex items-center cursor-pointer">
           <Funnel size={20} />
@@ -71,7 +92,7 @@ const DashBoard = () => {
       {/* tables */}
       <div className="mt-5">
         <div className="overflow-x-auto rounded-lg shadow-sm ">
-          <table className="w-full text-left text-sm ">
+          <table className="w-full text-left text-base ">
             <thead className="bg-gray-200">
               <tr>
                 <th className="px-4 py-3 text-center">#</th>
@@ -83,7 +104,7 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {rooms
+              {filteredRooms
                 .filter((room) => room.status === "vacant")
                 .map((element, index) => (
                   <tr className="border-b border-gray-300" key={index}>
