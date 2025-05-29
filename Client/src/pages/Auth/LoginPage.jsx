@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
-import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { useAuthStore } from "../../store/AuthStore";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

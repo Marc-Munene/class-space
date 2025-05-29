@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -8,10 +9,44 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("signing up ...");
+    if (password !== confirmPassword) {
+      toast.error("passwords don't match!");
+      return;
+    }
+
+    const formData = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Sign Up Successful");
+        navigate("/login");
+      } else {
+        toast.error("something went wrong, please try again!");
+      }
+    } catch (error) {
+      toast.error("something went wrong, please try again!");
+    }
   };
 
   return (
