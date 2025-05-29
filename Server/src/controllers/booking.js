@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import { Booking } from "../database/models/booking.js";
+import { Room } from "../database/models/room.js";
 import { User } from "../database/models/User.js";
 
 //get all boookings
@@ -22,43 +24,58 @@ export const getBooking = async (req, res) => {
 
 //add booking
 export const addBooking = async (req, res) => {
+  const session = await mongoose.startSession();
   try {
+    session.startTransaction();
+
+    const { room, date, building, startTime, endTime, purpose } = req.body;
     const user = req.user;
 
-    // console.log("request user:", req.user);
-    // console.log(req);
-
-    const { room, date, building, startTime, endTime, purpose, status } =
-      req.body;
-
-    const loggedInUser = await User.findById(user._id);
-
-    if (!loggedInUser) throw new Error("User not found");
+    // Validate required fields
+    if (!room || !date || !building || !startTime || !endTime || !purpose) {
+      throw new Error("Missing required booking fields");
+    }
 
     const bookingData = {
-      user: loggedInUser._id,
+      user: user._id,
       room,
       building,
-      date,
+      date: new Date(date),
       startTime,
       endTime,
       purpose,
-      status,
+      status: "not-started"
     };
 
-    const newBooking = await Booking.create(bookingData);
+    const newBooking = await Booking.create([bookingData], { session });
 
-    res.status(200).json({
+    // Update room status
+    const updatedRoom = await Room.findByIdAndUpdate(
+      room,
+      { status: "booked" },
+      { new: true, session }
+    );
+
+    if (!updatedRoom) {
+      throw new Error("Room not found or update failed");
+    }
+
+    await session.commitTransaction();
+    
+    res.status(201).json({
       success: true,
-      message: "Booking got successfully",
-      data: newBooking,
+      message: "Booking created successfully",
+      data: newBooking[0] // create returns an array
     });
   } catch (error) {
-    console.log(error);
+    await session.abortTransaction();
+    console.error("Booking error:", error.message);
     res.status(500).json({
       success: false,
-      message: "cannot add bookings",
+      message: error.message || "Failed to create booking"
     });
+  } finally {
+    session.endSession();
   }
 };
 
