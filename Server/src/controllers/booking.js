@@ -3,7 +3,7 @@ import { Booking } from "../database/models/booking.js";
 //get all boookings
 export const getBooking = async (req, res) => {
   try {
-    const booking = await Booking.find().populate("user room");
+    const booking = await Booking.find().populate("user room building");
 
     res.status(200).json({
       success: true,
@@ -22,11 +22,12 @@ export const getBooking = async (req, res) => {
 //add booking
 export const addBooking = async (req, res) => {
   try {
-    const { user, room, date, startTime, endTime, purpose, status } = req.body;
+    const { user, room, date, building, startTime, endTime, purpose, status } = req.body;
 
     const bookingData = {
       user,
       room,
+      building,
       date,
       startTime,
       endTime,
