@@ -1,6 +1,7 @@
 import { BookCheck, Building2, LayoutDashboard, LogOut } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useAuthStore } from "../store/AuthStore";
 
 const SideBar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -8,6 +9,10 @@ const SideBar = () => {
   const closeMobileMenu = () => {
     setShowMobileMenu(false);
   };
+
+  const { logOut } = useAuthStore();
+
+  const navigate = useNavigate();
   return (
     <div className="w-[15%] px-1">
       {/* Mobile Menu Button */}
@@ -68,7 +73,10 @@ const SideBar = () => {
         {/* logout */}
         <button
           className="flex items-center justify-center  gap-2 rounded-full bg-red-100 w-full py-2 mt-5 hover:bg-red-200 text-red-500 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
-          onClick={closeMobileMenu}
+          onClick={() => {
+            logOut();
+            navigate("/");
+          }}
         >
           <LogOut size={18} />
           <span className="font-bold text-sm">Logout</span>

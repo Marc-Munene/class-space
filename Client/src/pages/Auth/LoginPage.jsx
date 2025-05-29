@@ -1,17 +1,36 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
-// import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
+import { useAuthStore } from "../../store/AuthStore";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { login } = useAuthStore();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("submitting ...");
+    // console.log("submitting ...");
+
+    const formData = {
+      email,
+      password,
+    };
+
+    const loginSuccess = await login(formData);
+
+    if (loginSuccess) {
+      toast.success("Login Successfull");
+
+      navigate("/dashboard");
+    } else {
+      toast.error("Invalid credentials");
+    }
   };
 
   return (
@@ -59,10 +78,8 @@ const LoginPage = () => {
             <Link
               to={"/signup"}
               className="flex items-center space-x-3 text-base text-blue-700 cursor-pointer"
-              // onClick={goToSignUp}
             >
               <span className="flex items-center gap-1">
-                {" "}
                 signUp <ArrowRight size={14} />
               </span>
             </Link>
