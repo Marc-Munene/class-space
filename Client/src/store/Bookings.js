@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-const useRoomStore = create((set) => ({
-  rooms: [],
+const useBookingStore = create((set) => ({
+  bookings: [],
 
-  roomData: async () => {
+  bookingData: async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/rooms`,
+        `${import.meta.env.VITE_SERVER_URL}/api/bookings`,
         {
           credentials: "include",
         }
@@ -14,16 +14,17 @@ const useRoomStore = create((set) => ({
 
       if (response.ok) {
         const { data } = await response.json();
+
+        console.log(data);
+
         set({
-          rooms: data,
+          bookings: data,
         });
       }
-
-      //   console.log(data);
     } catch (error) {
       console.log(error);
     }
   },
 }));
 
-export { useRoomStore };
+export { useBookingStore };

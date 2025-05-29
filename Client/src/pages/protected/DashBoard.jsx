@@ -16,7 +16,6 @@ const DashBoard = () => {
     roomData();
   }, []);
 
-
   const closeModal = () => {
     setModal(false);
   };

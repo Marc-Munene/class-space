@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+import { useBookingStore } from "../../store/Bookings";
+
 const Bookings = () => {
+  const { bookingData, bookings } = useBookingStore();
+
+  useEffect(() => {
+    bookingData();
+  }, []);
   return (
     <>
       <div className="mt-5 flex justify-center text-4xl font-semibold">
@@ -12,34 +20,22 @@ const Bookings = () => {
               <th className="p-2 sm:p-3 text-center">#</th>
               <th className="p-2 sm:p-3 text-center">ROOM</th>
               <th className="p-2 sm:p-3 text-center">BUILDING</th>
-              <th className="p-2 sm:p-3 text-center">Action</th>
+              <th className="p-2 sm:p-3 text-center">Details</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">1</td>
-              <td className="py-2 sm:py-3 text-center">SPA 101</td>
-              <td className="py-2 sm:py-3 text-center">SPA</td>
-              <td className="py-2 sm:py-3 text-center text-DeepBlue">
-                View Details
-              </td>
-            </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">2</td>
-              <td className="py-2 sm:py-3 text-center">CLB 002</td>
-              <td className="py-2 sm:py-3 text-center">CLB</td>
-              <td className="py-2 sm:py-3 text-center text-DeepBlue">
-                View Details
-              </td>
-            </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-2 sm:py-3 text-center">3</td>
-              <td className="py-2 sm:py-3 text-center">NCLB 011</td>
-              <td className="py-2 sm:py-3 text-center">NCLB</td>
-              <td className="py-2 sm:py-3 text-center text-DeepBlue">
-                View Details
-              </td>
-            </tr>
+            {bookings.map((element, i) => (
+              <tr className="border-b border-gray-300" key={i}>
+                <td className="py-2 sm:py-3 text-center">{i + 1}</td>
+                <td className="py-2 sm:py-3 text-center">
+                  {element.room.roomName}
+                </td>
+                <td className="py-2 sm:py-3 text-center">
+                  {element.building.buildingName}
+                </td>
+                <td className="py-2 sm:py-3 text-DeepBlue text-center">View</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
