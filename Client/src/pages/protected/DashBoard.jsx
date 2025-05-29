@@ -10,7 +10,16 @@ const DashBoard = () => {
   const [search, setSearch] = useState("");
   const [modal, setModal] = useState(false);
 
+  const [selectedRoom, setSelectedRoom] = useState("");
+  // const [selectedBuilding, setSelectedBuilding] = useState("");
+
   const { roomData, rooms } = useRoomStore();
+
+  const BookRoomClick = (element) => {
+    setSelectedRoom(element);
+    // setSelectedBuilding(element.building._id);
+    setModal(true);
+  };
 
   useEffect(() => {
     roomData();
@@ -74,11 +83,11 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {rooms.map((element, i) => (
-                <tr className="border-b border-gray-300" key={i}>
-                  <td className="py-2 sm:py-3 text-center">{i + 1}</td>
+              {rooms.map((element, index) => (
+                <tr className="border-b border-gray-300" key={index}>
+                  <td className="py-2 sm:py-3 text-center">{index + 1}</td>
                   <td className="py-2 sm:py-3 text-center">
-                    {element.roomName}{" "}
+                    {element.roomName}
                   </td>
                   <td className="py-2 sm:py-3 text-center">
                     {element.building.buildingName}
@@ -86,13 +95,11 @@ const DashBoard = () => {
                   <td className="py-2 sm:py-3 text-center">
                     {element.capacity}
                   </td>
-                  <td className="py-2 sm:py-3 text-center">
-                    {element.status}{" "}
-                  </td>
+                  <td className="py-2 sm:py-3 text-center">{element.status}</td>
                   <td className="py-2 sm:py-3 text-center">
                     <button
                       className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
-                      onClick={() => setModal(true)}
+                      onClick={() => BookRoomClick(element)}
                     >
                       BOOK
                     </button>
@@ -104,8 +111,8 @@ const DashBoard = () => {
         </div>
       </div>
 
-      <Modal openModal={modal} closeModal={closeModal}>
-        <BookingForm />
+      <Modal openModal={modal} closeModal={() => setModal(false)}>
+        <BookingForm room={selectedRoom} closeModal={() => setModal(false)}/>
       </Modal>
     </>
   );

@@ -26,6 +26,7 @@ const useAuthStore = create((set) => ({
         // console.log(data);
 
         set({ user: data, isLoggedIn: true });
+
         return true;
       } else {
         return false;
