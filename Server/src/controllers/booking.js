@@ -1,4 +1,5 @@
 import { Booking } from "../database/models/booking.js";
+import { User } from "../database/models/User.js";
 
 //get all boookings
 export const getBooking = async (req, res) => {
@@ -22,10 +23,20 @@ export const getBooking = async (req, res) => {
 //add booking
 export const addBooking = async (req, res) => {
   try {
-    const { user, room, date, building, startTime, endTime, purpose, status } = req.body;
+    const user = req.user;
+
+    // console.log("request user:", req.user);
+    // console.log(req);
+
+    const { room, date, building, startTime, endTime, purpose, status } =
+      req.body;
+
+    const loggedInUser = await User.findById(user._id);
+
+    if (!loggedInUser) throw new Error("User not found");
 
     const bookingData = {
-      user,
+      user: loggedInUser._id,
       room,
       building,
       date,

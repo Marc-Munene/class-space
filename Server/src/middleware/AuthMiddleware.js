@@ -3,6 +3,7 @@ import { User } from "../database/models/User.js";
 
 export const userAuthentication = async (req, res, next) => {
   try {
+    const token = req.cookies[process.env.AUTH_COOKIE_NAME];
     // console.log("req.cookies", req.cookies);
 
     // console.log("token", token);
@@ -19,9 +20,11 @@ export const userAuthentication = async (req, res, next) => {
 
     const user = await User.findById(_id);
 
+    console.log("user:", user);
+
     if (!user) throw new Error("Invalid Token!");
 
-    req.doctor = user;
+    req.user = user;
 
     next();
   } catch (error) {

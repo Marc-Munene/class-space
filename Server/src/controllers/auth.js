@@ -87,6 +87,7 @@ export const login = async (req, res) => {
       // maxAge = how long the cookie is valid for in milliseconds
     });
 
+   
     return res.json({
       success: true,
       data: user,

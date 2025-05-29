@@ -14,6 +14,12 @@ import { bookingRouter } from "./routes/bookingRoute.js";
 import { notificationRouter } from "./routes/notificationRoute.js";
 import { authRouter } from "./routes/authRoute.js";
 
+//cookie parser
+import cookieParser from "cookie-parser";
+
+//user authenication middleware
+import { userAuthentication } from "./middleware/AuthMiddleware.js";
+
 const app = express();
 
 //cors
@@ -24,13 +30,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-//Database connect
-connectDB();
+//PORT
+const PORT = process.env.PORT;
+
+//cookie parser middleware
+app.use(cookieParser());
 
 //middleware
 app.use(express.json());
 
-const PORT = process.env.PORT;
+//Database connect
+connectDB();
 
 //home route
 app.get("/", getHome);
@@ -39,6 +49,7 @@ app.get("/", getHome);
 app.use(
   "/api",
   authRouter,
+  userAuthentication,
   userRouter,
   buildingRouter,
   roomRouter,
