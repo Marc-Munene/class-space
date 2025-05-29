@@ -23,7 +23,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     roomData();
-  }, []);
+  }, [roomData]);
 
   const closeModal = () => {
     setModal(false);
@@ -83,36 +83,40 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {rooms.map((element, index) => (
-                <tr className="border-b border-gray-300" key={index}>
-                  <td className="py-2 sm:py-3 text-center">{index + 1}</td>
-                  <td className="py-2 sm:py-3 text-center">
-                    {element.roomName}
-                  </td>
-                  <td className="py-2 sm:py-3 text-center">
-                    {element.building.buildingName}
-                  </td>
-                  <td className="py-2 sm:py-3 text-center">
-                    {element.capacity}
-                  </td>
-                  <td className="py-2 sm:py-3 text-center">{element.status}</td>
-                  <td className="py-2 sm:py-3 text-center">
-                    <button
-                      className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
-                      onClick={() => BookRoomClick(element)}
-                    >
-                      BOOK
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {rooms
+                .filter((room) => room.status === "vacant")
+                .map((element, index) => (
+                  <tr className="border-b border-gray-300" key={index}>
+                    <td className="py-2 sm:py-3 text-center">{index + 1}</td>
+                    <td className="py-2 sm:py-3 text-center">
+                      {element.roomName}
+                    </td>
+                    <td className="py-2 sm:py-3 text-center">
+                      {element.building.buildingName}
+                    </td>
+                    <td className="py-2 sm:py-3 text-center">
+                      {element.capacity}
+                    </td>
+                    <td className="py-2 sm:py-3 text-center">
+                      {element.status}
+                    </td>
+                    <td className="py-2 sm:py-3 text-center">
+                      <button
+                        className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
+                        onClick={() => BookRoomClick(element)}
+                      >
+                        BOOK
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
       </div>
 
       <Modal openModal={modal} closeModal={() => setModal(false)}>
-        <BookingForm room={selectedRoom} closeModal={() => setModal(false)}/>
+        <BookingForm room={selectedRoom} closeModal={() => setModal(false)} />
       </Modal>
     </>
   );

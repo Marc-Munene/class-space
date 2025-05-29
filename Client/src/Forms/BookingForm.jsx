@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { useBookingStore } from "../store/Bookings";
+import { useNavigate } from "react-router";
 
 const BookingForm = ({ closeModal, room }) => {
   const [date, setDate] = useState("");
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
   const [purpose, setPurpose] = useState("");
+
+  const navigate = useNavigate();
 
   // const [roomId, setRoomId] = useState("");
 
@@ -46,10 +49,11 @@ const BookingForm = ({ closeModal, room }) => {
       } else {
         bookingData();
         toast.success("Room booked successfully");
+        navigate("/bookings");
         closeModal();
       }
 
-      console.log("submitting ....");
+      // console.log("submitting ....");
     } catch (error) {
       console.error(error);
       toast.error("Booking failed");
