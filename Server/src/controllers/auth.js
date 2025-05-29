@@ -99,3 +99,16 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const currentUser = (req, res) => {
+  res.json({
+    success: true,
+    data: req.user,
+  });
+};
+
+export const logout = (req, res) => {
+  res.clearCookie(process.env.AUTH_COOKIE_NAME).json({
+    success: true,
+  });
+};
