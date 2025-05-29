@@ -1,5 +1,6 @@
 import { compare, hash } from "bcrypt";
 import { User } from "../database/models/User.js";
+import jwt from "jsonwebtoken";
 
 //singUp
 export const signUp = async (req, res) => {
@@ -51,6 +52,40 @@ export const login = async (req, res) => {
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) throw new Error("invalid credentials");
+
+    //the password is correct, now we generate the JWT token for the user
+
+    const { _id } = user;
+    const jwtinfo = {
+      _id,
+    };
+
+    //sign the jwt using the secret key
+    const token = jwt.sign(jwtinfo, process.env.JWT_SECRET, {
+      expiresIn: 24 * 60 * 60,
+    });
+
+    //add token to the cookie
+    res.cookie(process.env.AUTH_COOKIE_NAME, token, {
+      maxAge: 24 * 60 * 1000,
+
+      //can only be accessed by server requestes
+
+      httpOnly: true,
+
+      //path where the cookie is valid
+      path: "/",
+
+      // domain = what domain the cookie is valid on
+      // domain: "localhost",
+      // secure = only send cookie over https
+
+      secure: process.env.NODE_ENV === "production",
+
+      // sameSite = only send cookie if the request is coming from the same origin
+      sameSite: "lax", // "strict" | "lax" | "none" (secure must be true)
+      // maxAge = how long the cookie is valid for in milliseconds
+    });
 
     return res.json({
       success: true,
