@@ -1,14 +1,21 @@
 import { StatCard } from "../../components/StatCard";
 import { startCarditems } from "../../../data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Funnel } from "lucide-react";
 import { Modal } from "../../components/Modal";
 import { BookingForm } from "../../Forms/BookingForm";
+import { useRoomStore } from "../../store/RoomStore";
 
 const DashBoard = () => {
   const [search, setSearch] = useState("");
-
   const [modal, setModal] = useState(false);
+
+  const { roomData, rooms } = useRoomStore();
+
+  useEffect(() => {
+    roomData();
+  }, []);
+
 
   const closeModal = () => {
     setModal(false);
@@ -68,58 +75,31 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Hardcoded table details */}
-              <tr className="border-b border-gray-300">
-                <td className="px-4 py-3 text-center">1</td>
-                <td className="px-4 py-3 text-center">SPA 101</td>
-                <td className="px-4 py-3 text-center">SPA</td>
-                <td className="px-4 py-3 text-center">65</td>
-                <td className="px-4 py-3 text-center">Vacant</td>
-                <td className="px-4 py-3 text-center">
-                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                    BOOK
-                  </button>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-300">
-                <td className="px-4 py-3  text-center">2</td>
-                <td className="px-4 py-3  text-center">CLB 001</td>
-                <td className="px-4 py-3  text-center">CLB</td>
-                <td className="px-4 py-3  text-center">70</td>
-                <td className="px-4 py-3  text-center">Vacant</td>
-                <td className="px-4 py-3  text-center">
-                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                    BOOK
-                  </button>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-300">
-                <td className="px-4 py-3  text-center">3</td>
-                <td className="px-4 py-3  text-center">NCLB 011</td>
-                <td className="px-4 py-3  text-center">NCLB</td>
-                <td className="px-4 py-3  text-center">34</td>
-                <td className="px-4 py-3  text-center">Vacant</td>
-                <td className="px-4 py-3  text-center">
-                  <button className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer">
-                    BOOK
-                  </button>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-300">
-                <td className="px-4 py-3  text-center">4</td>
-                <td className="px-4 py-3  text-center">NCLB 004</td>
-                <td className="px-4 py-3  text-center">NCLB</td>
-                <td className="px-4 py-3  text-center">80</td>
-                <td className="px-4 py-3  text-center">Vacant</td>
-                <td className="px-4 py-3  text-center">
-                  <button
-                    className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
-                    onClick={() => setModal(true)}
-                  >
-                    BOOK
-                  </button>
-                </td>
-              </tr>
+              {rooms.map((element, i) => (
+                <tr className="border-b border-gray-300" key={i}>
+                  <td className="py-2 sm:py-3 text-center">{i + 1}</td>
+                  <td className="py-2 sm:py-3 text-center">
+                    {element.roomName}{" "}
+                  </td>
+                  <td className="py-2 sm:py-3 text-center">
+                    {element.building.buildingName}
+                  </td>
+                  <td className="py-2 sm:py-3 text-center">
+                    {element.capacity}
+                  </td>
+                  <td className="py-2 sm:py-3 text-center">
+                    {element.status}{" "}
+                  </td>
+                  <td className="py-2 sm:py-3 text-center">
+                    <button
+                      className="bg-red-400 hover:bg-red-500 text-black py-1 px-3 rounded-md shadow-sm text-xs sm:text-sm cursor-pointer"
+                      onClick={() => setModal(true)}
+                    >
+                      BOOK
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
