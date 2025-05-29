@@ -2,6 +2,9 @@ import express from "express";
 
 import "dotenv/config";
 
+import cors from "cors";
+
+//routes
 import { connectDB } from "./database/config.js";
 import { getHome } from "./controllers/home.js";
 import { userRouter } from "./routes/userRoute.js";
@@ -12,6 +15,14 @@ import { notificationRouter } from "./routes/notificationRoute.js";
 import { authRouter } from "./routes/authRoute.js";
 
 const app = express();
+
+//cors
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 //Database connect
 connectDB();
