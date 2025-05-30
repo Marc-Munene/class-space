@@ -34,10 +34,22 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center">
+    <div
+      className="min-h-screen  flex items-center justify-center relative "
+      style={{
+        backgroundImage: "url('/Class-space.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      {/* Overlay */}
+      {/* <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div> */}
+      {/* form container */}
       <form
         onSubmit={handleSubmit}
-        className=" bg-opacity-50 backdrop-blur-sm rounded-xl shadow-xl p-8 w-full max-w-sm"
+        className="relative z-10 bg-opacity-90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-full max-w-sm "
       >
         <div className="text-center mb-6">
           <h1 className="text-2xl font-semibold text-blsck"> Login</h1>
@@ -46,7 +58,9 @@ const LoginPage = () => {
 
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-base text-gray-700 font-medium">Email</label>
+            <label className="text-base text-gray-700 font-extrabold ">
+              Email
+            </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -58,7 +72,7 @@ const LoginPage = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base text-gray-700 font-medium">
+            <label className="text-base text-gray-700 font-extrabold ">
               Password
             </label>
             <input
