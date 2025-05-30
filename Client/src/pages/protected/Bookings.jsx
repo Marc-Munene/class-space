@@ -53,7 +53,7 @@ const Bookings = () => {
                   })}
                 </td>
                 <td
-                  className="py-2 sm:py-3 text-DeepBlue text-center"
+                  className="py-2 sm:py-3 text-DeepBlue text-center  cursor-pointer"
                   onClick={() => handleClick(element)}
                 >
                   View

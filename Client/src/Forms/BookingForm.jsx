@@ -10,11 +10,6 @@ const BookingForm = ({ closeModal, room }) => {
   const [purpose, setPurpose] = useState("");
 
   const navigate = useNavigate();
-
-  // const [roomId, setRoomId] = useState("");
-
-  // const [buildingId, setBuildingId] = useState("");
-
   const { bookingData } = useBookingStore();
 
   const handleSubmit = async (e) => {

@@ -1,14 +1,6 @@
-import { useState } from "react";
-
 const BookingDetailsForm = ({ booking }) => {
-  const [date, setDate] = useState("");
-  const [timeStart, setTimeStart] = useState("");
-  const [timeEnd, setTimeEnd] = useState("");
-  const [purpose, setPurpose] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    
+  if (!booking) return null; // or a loading state
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
