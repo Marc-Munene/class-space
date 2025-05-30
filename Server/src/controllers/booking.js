@@ -106,7 +106,7 @@ export const editBooking = async (req, res) => {
 //delete Booking
 export const deleteBooking = async (req, res) => {
   try {
-    const bookingId = req.query.Id;
+    const bookingId = req.params.id;
 
     // 1. Find the booking first to get the room ID
     const booking = await Booking.findById(bookingId);
@@ -115,6 +115,14 @@ export const deleteBooking = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Booking not found",
+      });
+    }
+
+    // // Check if the authenticated user is the one who created the booking
+    if (booking.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "you can only delete your own booking",
       });
     }
 
