@@ -111,7 +111,7 @@ const SignUp = () => {
 
           <div className="flex flex-col gap-2">
             <label className="text-base text-gray-700 font-medium">
-              Confrim Password
+              Confirm Password
             </label>
             <input
               value={confirmPassword}

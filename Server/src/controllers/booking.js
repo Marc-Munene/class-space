@@ -82,7 +82,7 @@ export const addBooking = async (req, res) => {
 //edit booking
 export const editBooking = async (req, res) => {
   try {
-    const bookingId = req.query.Id;
+    const bookingId = req.body._id; // moved from query to body
 
     const booking = await Booking.findOneAndUpdate(
       { _id: bookingId },
