@@ -53,7 +53,7 @@ const SignUp = () => {
     <div
       className="min-h-screen flex items-center justify-center text-base"
       style={{
-        backgroundImage: "url('/signup.jpg')",
+        backgroundImage: "url('/Class-space.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -62,7 +62,7 @@ const SignUp = () => {
     >
       <form
         onSubmit={handleSubmit}
-        className="bg-opacity-50 backdrop-blur-sm rounded-xl shadow-xl py-3 px-5 w-full max-w-sm"
+        className="relative z-10 bg-opacity-90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-full max-w-sm "
       >
         <div className="text-center mb-3">
           <h1 className="text-2xl font-semibold text-black">Sign Up</h1>
@@ -70,7 +70,10 @@ const SignUp = () => {
 
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2">
-            <label className="text-base text-gray-700 font-medium"> Name</label>
+            <label className="text-base text-gray-700 font-extrabold ">
+              {" "}
+              Name
+            </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -81,7 +84,9 @@ const SignUp = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base text-gray-700 font-medium">Email</label>
+            <label className="text-base text-gray-700 font-extrabold ">
+              Email
+            </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -92,7 +97,7 @@ const SignUp = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base text-gray-700 font-medium">
+            <label className="text-base text-gray-700 font-extrabold ">
               Password
             </label>
             <input
