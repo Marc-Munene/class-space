@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+import { useBuildingStore } from "../../store/Buildings";
+
 const Buildings = () => {
+  const { buildingData, buildings } = useBuildingStore();
+
+  useEffect(() => {
+    buildingData();
+  }, []);
   return (
     <>
       <div className="mt-5 flex justify-center text-4xl font-semibold">
