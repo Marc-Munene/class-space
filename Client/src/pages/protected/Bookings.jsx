@@ -18,6 +18,15 @@ const Bookings = () => {
     setModal(true);
   };
 
+  const closeModal = () => {
+    setModal(false);
+    setSelectedBooking(null);
+  };
+
+  const refreshBookings = () => {
+    bookingData(); // This re-fetches booking data
+  };
+
   return (
     <>
       <div className="mt-5 flex justify-center text-4xl font-semibold">
@@ -65,7 +74,13 @@ const Bookings = () => {
       </div>
 
       <Modal openModal={modal} closeModal={() => setModal(false)}>
-        <BookingDetailsForm booking={selectedBooking} />
+        <BookingDetailsForm
+          booking={selectedBooking}
+          onBookingCanceled={() => {
+            closeModal(); // optional
+            refreshBookings(); // optional
+          }}
+        />
       </Modal>
     </>
   );

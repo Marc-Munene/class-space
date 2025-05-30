@@ -2,6 +2,7 @@ import { BookCheck, Building2, LayoutDashboard, LogOut } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useAuthStore } from "../store/AuthStore";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 const SideBar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -10,7 +11,7 @@ const SideBar = () => {
     setShowMobileMenu(false);
   };
 
-  const { logOut } = useAuthStore();
+  const { logOut, user } = useAuthStore();
 
   const navigate = useNavigate();
   return (
@@ -70,9 +71,15 @@ const SideBar = () => {
           <span className="text-base">Buildings</span>
         </NavLink>
 
+        <div className="p-2 mt-10  bg-gray-100 rounded-full">
+          <span className="flex gap-4 items-center">
+            <ProfileDropdown user={user} />
+          </span>
+        </div>
+
         {/* logout */}
         <button
-          className="flex items-center justify-center  gap-2 rounded-full bg-red-100 w-full py-2 mt-5 hover:bg-red-200 text-red-500 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
+          className="flex items-center justify-center  gap-2 rounded-full bg-red-100 w-full py-2 mt-10 hover:bg-red-200 text-red-500 transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
           onClick={() => {
             logOut();
             navigate("/");
