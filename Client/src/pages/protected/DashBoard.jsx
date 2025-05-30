@@ -1,11 +1,13 @@
 import { StatCard } from "../../components/StatCard";
-import { startCarditems } from "../../../data";
+// import { startCarditems } from "../../../data";
 import { useEffect, useMemo, useState } from "react";
 import { Funnel } from "lucide-react";
 import { Modal } from "../../components/Modal";
 import { BookingForm } from "../../Forms/BookingForm";
 import { useRoomStore } from "../../store/RoomStore";
 import debounce from "debounce";
+import { BarChart3, Construction, DoorClosed, DoorOpen } from "lucide-react";
+import { getRoomStats } from "../../../data";
 
 const DashBoard = () => {
   const [searchItem, setSearchItem] = useState("");
@@ -23,6 +25,8 @@ const DashBoard = () => {
   useEffect(() => {
     setFilteredRooms(rooms);
   }, [rooms]);
+
+  const cardItems = getRoomStats(rooms);
 
   const debouncedSearch = useMemo(
     () =>
@@ -59,7 +63,7 @@ const DashBoard = () => {
 
       {/* Stat Cards */}
       <div className="flex flex-wrap justify-center mt-5 gap-6 p-6">
-        {startCarditems.map((elem, i) => (
+        {cardItems.map((elem, i) => (
           <div
             key={i}
             className="transform transform-fill duration-300 ease-in-out hover:scale-[1.06]"
