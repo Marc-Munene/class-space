@@ -1,12 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBookingStore } from "../../store/Bookings";
+import { Modal } from "../../components/Modal";
+import { BookingDetailsForm } from "../../Forms/BookingDetailsForm";
 
 const Bookings = () => {
   const { bookingData, bookings } = useBookingStore();
 
+  const [modal, setModal] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+
   useEffect(() => {
     bookingData();
   }, []);
+
+  const handleClick = (booking) => {
+    setSelectedBooking(booking);
+    setModal(true);
+  };
+
   return (
     <>
       <div className="mt-5 flex justify-center text-4xl font-semibold">
@@ -20,6 +31,7 @@ const Bookings = () => {
               <th className="p-2 sm:p-3 text-center">#</th>
               <th className="p-2 sm:p-3 text-center">ROOM</th>
               <th className="p-2 sm:p-3 text-center">BUILDING</th>
+              <th className="p-2 sm:p-3 text-center">DATE</th>
               <th className="p-2 sm:p-3 text-center">Details</th>
             </tr>
           </thead>
@@ -33,12 +45,28 @@ const Bookings = () => {
                 <td className="py-2 sm:py-3 text-center">
                   {element.building.buildingName}
                 </td>
-                <td className="py-2 sm:py-3 text-DeepBlue text-center">View</td>
+                <td className="py-2 sm:py-3 text-center">
+                  {new Date(element.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </td>
+                <td
+                  className="py-2 sm:py-3 text-DeepBlue text-center"
+                  onClick={() => handleClick(element)}
+                >
+                  View
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <Modal openModal={modal} closeModal={() => setModal(false)}>
+        <BookingDetailsForm booking={selectedBooking} />
+      </Modal>
     </>
   );
 };
