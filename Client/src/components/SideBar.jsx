@@ -44,7 +44,14 @@ const SideBar = () => {
         {/* dashboard link */}
         <NavLink
           to={"/dashboard"}
-          className="flex items-center p-2 gap-2 w-full  hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
+          className={({ isActive }) =>
+            `flex items-center justify-around py-1 md:py-2 lg:py-3 px-2 sm:px-3 md:px-4 rounded-3xl transition-all duration-300 ease-in-out text-xs sm:text-sm md:text-base lg:text-xl 
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700 scale-[1.08] shadow-2xl"
+                      : "hover:backdrop-blur-lg hover:rounded-4xl hover:shadow-2xl hover:bg-gray-200 hover:px-2 sm:hover:px-3 transform transform-fill hover:scale-[1.06]"
+                  }`
+          }
           onClick={closeMobileMenu}
         >
           <LayoutDashboard size={18} />
@@ -54,7 +61,14 @@ const SideBar = () => {
         {/* bookings link */}
         <NavLink
           to={"/bookings"}
-          className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer "
+          className={({ isActive }) =>
+            `flex items-center justify-around py-1 md:py-2 lg:py-3 px-2 sm:px-3 md:px-4 rounded-3xl transition-all duration-300 ease-in-out text-xs sm:text-sm md:text-base lg:text-xl 
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700 scale-[1.08] shadow-2xl"
+                      : "hover:backdrop-blur-lg hover:rounded-4xl hover:shadow-2xl hover:bg-gray-200 hover:px-2 sm:hover:px-3 transform transform-fill hover:scale-[1.06]"
+                  }`
+          }
           onClick={closeMobileMenu}
         >
           <BookCheck size={18} />
@@ -64,15 +78,22 @@ const SideBar = () => {
         {/* buildings */}
         <NavLink
           to={"/buildings"}
-          className="flex items-center w-full p-2 gap-2 hover:bg-gray-200 hover:rounded-full transform transform-fill duration-300 ease-in-out hover:scale-[1.06] cursor-pointer"
+          className={({ isActive }) =>
+            `flex items-center justify-around py-1 md:py-2 lg:py-3 px-2 sm:px-3 md:px-4 rounded-3xl transition-all duration-300 ease-in-out text-xs sm:text-sm md:text-base lg:text-xl 
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700 scale-[1.08] shadow-2xl"
+                      : "hover:backdrop-blur-lg hover:rounded-4xl hover:shadow-2xl hover:bg-gray-200 hover:px-2 sm:hover:px-3 transform transform-fill hover:scale-[1.06]"
+                  }`
+          }
           onClick={closeMobileMenu}
         >
           <Building2 size={18} />
           <span className="text-base">Buildings</span>
         </NavLink>
 
-        <div className="p-2 mt-10  bg-gray-100 rounded-full">
-          <span className="flex gap-4 items-center">
+        <div className="p-2 mt-10 rounded-full">
+          <span>
             <ProfileDropdown user={user} />
           </span>
         </div>

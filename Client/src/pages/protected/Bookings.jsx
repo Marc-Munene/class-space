@@ -41,6 +41,7 @@ const Bookings = () => {
               <th className="p-2 sm:p-3 text-center">ROOM</th>
               <th className="p-2 sm:p-3 text-center">BUILDING</th>
               <th className="p-2 sm:p-3 text-center">DATE</th>
+              <th className="p-2 sm:p-3 text-center">STATUS</th>
               <th className="p-2 sm:p-3 text-center">Details</th>
             </tr>
           </thead>
@@ -60,6 +61,9 @@ const Bookings = () => {
                     month: "short",
                     day: "numeric",
                   })}
+                </td>
+                <td className="py-2 sm:py-3 text-center">
+                  {element.status}
                 </td>
                 <td
                   className="py-2 sm:py-3 text-DeepBlue text-center  cursor-pointer"

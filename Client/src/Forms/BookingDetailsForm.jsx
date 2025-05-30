@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const BookingDetailsForm = ({ booking, onBookingCancelled }) => {
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   if (!booking) return null;
 
   const handleCancelBooking = async () => {
@@ -13,7 +14,7 @@ const BookingDetailsForm = ({ booking, onBookingCancelled }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/bookings?Id=${booking._id}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/bookings/${booking._id}`,
         {
           method: "DELETE",
           headers: {
@@ -27,6 +28,8 @@ const BookingDetailsForm = ({ booking, onBookingCancelled }) => {
 
       if (response.ok && result.success) {
         toast.success("Booking cancelled successfully.");
+
+        navigate("/dashboard");
         if (onBookingCancelled) onBookingCancelled(); // Trigger parent callback
       } else {
         toast.error(result.message || "Failed to cancel booking.");
@@ -86,7 +89,7 @@ const BookingDetailsForm = ({ booking, onBookingCancelled }) => {
 
       <div className="flex justify-end pt-6">
         <button
-          className="px-4 py-2 text-sm font-medium bg-red-500 hover:bg-red-600 text-white rounded-md"
+          className="px-4 py-2 text-sm font-medium bg-red-500 hover:bg-red-600 text-white rounded-md cursor-pointer"
           onClick={handleCancelBooking}
           disabled={loading}
         >

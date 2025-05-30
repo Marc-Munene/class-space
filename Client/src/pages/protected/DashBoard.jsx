@@ -51,8 +51,14 @@ const DashBoard = () => {
   };
   return (
     <>
+      <div className="mt-5 flex justify-center">
+        <h1 className="text-NavyBlue text-4xl font-semibold">
+          Find Vacant Rooms
+        </h1>
+      </div>
+
       {/* Stat Cards */}
-      <div className="flex flex-wrap justify-center gap-6 p-6">
+      <div className="flex flex-wrap justify-center mt-5 gap-6 p-6">
         {startCarditems.map((elem, i) => (
           <div
             key={i}
@@ -66,12 +72,6 @@ const DashBoard = () => {
             />
           </div>
         ))}
-      </div>
-
-      <div className="mt-5 flex justify-center">
-        <h1 className="text-NavyBlue text-4xl font-semibold">
-          Find Vacant Rooms
-        </h1>
       </div>
 
       {/* search bar */}

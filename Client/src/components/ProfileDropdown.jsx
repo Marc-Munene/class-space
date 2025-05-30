@@ -19,10 +19,13 @@ const ProfileDropdown = ({ user }) => {
   if (!user || !user.name || !user.email) return null;
 
   return (
-    <div className="relative flex justify-center" ref={dropdownRef}>
+    <div
+      className="relative flex justify-center bg-gray-50 p-3 rounded-4xl transform  transform-fill duration-300 ease-in-out hover:scale-[1.06] "
+      ref={dropdownRef}
+    >
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold"
+        className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold cursor-pointer animate-bounce"
         title="View Profile"
       >
         {user.name.charAt(0).toUpperCase()}

@@ -15,7 +15,7 @@ const useBookingStore = create((set,) => ({
       if (response.ok) {
         const { data } = await response.json();
 
-        console.log(data);
+        // console.log(data);
 
         set({
           bookings: data,
