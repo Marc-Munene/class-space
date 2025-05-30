@@ -3,7 +3,7 @@ import { Building } from "../database/models/building.js";
 //get buildings
 export const getBuildings = async (req, res) => {
   try {
-    const buildings = await Building.find();
+    const buildings = await Building.find().populate("rooms");
 
     res.status(200).json({
       success: true,
