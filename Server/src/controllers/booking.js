@@ -44,7 +44,7 @@ export const addBooking = async (req, res) => {
       startTime,
       endTime,
       purpose,
-      status: "not-started"
+      status: "not-started",
     };
 
     const newBooking = await Booking.create([bookingData], { session });
@@ -61,18 +61,18 @@ export const addBooking = async (req, res) => {
     }
 
     await session.commitTransaction();
-    
+
     res.status(201).json({
       success: true,
       message: "Booking created successfully",
-      data: newBooking[0] // create returns an array
+      data: newBooking[0], // create returns an array
     });
   } catch (error) {
     await session.abortTransaction();
-    console.error("Booking error:", error.message);
+    // console.error("Booking error:", error.message);
     res.status(500).json({
       success: false,
-      message: error.message || "Failed to create booking"
+      message: error.message || "Failed to create booking",
     });
   } finally {
     session.endSession();
@@ -108,7 +108,26 @@ export const deleteBooking = async (req, res) => {
   try {
     const bookingId = req.query.Id;
 
+    // 1. Find the booking first to get the room ID
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+
+    // Get the room ID from the booking
+    const roomId = booking.room;
+
     const deletedBooking = await Booking.deleteOne({ _id: bookingId });
+
+    // Set the associated room status to vacant and isBooked false
+    await Room.findByIdAndUpdate(roomId, {
+      status: "vacant",
+      isBooked: false,
+    });
 
     res.status(200).json({
       success: true,

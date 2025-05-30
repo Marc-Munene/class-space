@@ -20,7 +20,7 @@ export const userAuthentication = async (req, res, next) => {
 
     const user = await User.findById(_id);
 
-    console.log("user:", user);
+    // console.log("user:", user);
 
     if (!user) throw new Error("Invalid Token!");
 
