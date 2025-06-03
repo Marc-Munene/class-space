@@ -140,7 +140,11 @@ const DashBoard = () => {
         </div>
       </div>
 
-      <Modal openModal={modal} closeModal={() => setModal(false)}>
+      <Modal
+        openModal={modal}
+        closeModal={() => setModal(false)}
+        title={`Book ${selectedRoom?.roomName}`}
+      >
         <BookingForm room={selectedRoom} closeModal={() => setModal(false)} />
       </Modal>
     </>
