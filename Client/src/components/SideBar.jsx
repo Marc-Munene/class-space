@@ -18,7 +18,7 @@ const SideBar = () => {
     <div className="w-[15%] px-1">
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden fixed text-base top-4 left-4 z-50 p-2 bg-primary text-black rounded"
+        className="md:hidden fixed text-lg top-4 left-4 z-50 p-2 bg-primary text-black rounded"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         ☰
@@ -33,14 +33,14 @@ const SideBar = () => {
         } transition-transform duration-300 ease-in-out shadow-lg md:shadow-none`}
       >
         {/* logo link */}
-        <button to={"/"} className="p-4" onClick={closeMobileMenu}>
+        <NavLink to={"/dashboard"} className="p-4" onClick={closeMobileMenu}>
           <img
             src="/Class-space-nobg.png"
             alt="Classify Logo"
             className="mx-auto cursor-pointer"
             width={160}
           />
-        </button>
+        </NavLink>
         {/* dashboard link */}
         <NavLink
           to={"/dashboard"}
@@ -92,6 +92,7 @@ const SideBar = () => {
           <span className="text-base">Buildings</span>
         </NavLink>
 
+        {/* Profile dropdown */}
         <div className="p-2 mt-10 rounded-full">
           <span>
             <ProfileDropdown user={user} />
@@ -107,7 +108,7 @@ const SideBar = () => {
           }}
         >
           <LogOut size={18} />
-          <span className="font-bold text-sm">Logout</span>
+          <span className="font-bold text-md">Logout</span>
         </button>
       </nav>
     </div>
