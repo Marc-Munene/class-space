@@ -1,12 +1,10 @@
 import { StatCard } from "../../components/StatCard";
-// import { startCarditems } from "../../../data";
 import { useEffect, useMemo, useState } from "react";
 import { Funnel } from "lucide-react";
 import { Modal } from "../../components/Modal";
 import { BookingForm } from "../../Forms/BookingForm";
 import { useRoomStore } from "../../store/RoomStore";
 import debounce from "debounce";
-import { BarChart3, Construction, DoorClosed, DoorOpen } from "lucide-react";
 import { getRoomStats } from "../../../data";
 
 const DashBoard = () => {
@@ -19,7 +17,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     roomData();
-  }, [roomData]);
+  }, []);
 
   // Initialize filteredRooms with all rooms
   useEffect(() => {
