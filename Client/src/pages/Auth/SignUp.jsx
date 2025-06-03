@@ -71,7 +71,6 @@ const SignUp = () => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2">
             <label className="text-base text-gray-700 font-extrabold ">
-              {" "}
               Name
             </label>
             <input
@@ -79,7 +78,7 @@ const SignUp = () => {
               onChange={(e) => setName(e.target.value)}
               type="text"
               className="p-2 border border-black rounded-md focus:border-blue-500 outline-none shadow-sm transition-all duration-300"
-              placeholder="John Doe"
+              placeholder="Karyl Gicho"
             />
           </div>
 
@@ -92,7 +91,7 @@ const SignUp = () => {
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               className="p-2 border border-black rounded-md focus:border-blue-500 outline-none shadow-sm transition-all duration-300"
-              placeholder="johndoe@gmail.com"
+              placeholder="karyl@gmail.com"
             />
           </div>
 
@@ -105,7 +104,7 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="p-2 border border-black rounded-md focus:border-blue-500 outline-none shadow-sm transition-all duration-300"
-              placeholder="12345"
+              placeholder="*****"
             />
           </div>
 
@@ -118,7 +117,7 @@ const SignUp = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               type="password"
               className="p-2 border border-black rounded-md focus:border-blue-500 outline-none shadow-sm transition-all duration-300"
-              placeholder="12345"
+              placeholder="*****"
             />
           </div>
 
@@ -132,7 +131,6 @@ const SignUp = () => {
               className="flex items-center space-x-3 text-base text-blue-700 cursor-pointer"
             >
               <span className="flex items-center gap-1">
-                {" "}
                 Login <ArrowRight size={14} />
               </span>
             </Link>
