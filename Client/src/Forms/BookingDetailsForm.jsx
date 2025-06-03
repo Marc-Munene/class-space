@@ -209,7 +209,7 @@ const BookingDetailsForm = ({
                 onClick={handleCancelBooking}
                 disabled={loading}
               >
-                {loading ? "Cancelling..." : "Delete Booking"}
+                {loading ? "Cancelling..." : "Cancel Session"}
               </button>
             </>
           )}
