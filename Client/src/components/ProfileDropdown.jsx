@@ -35,7 +35,6 @@ const ProfileDropdown = ({ user }) => {
         <div className="absolute left-full top-0 ml-3 w-52 bg-white rounded-md shadow-md ring-1 ring-black ring-opacity-5 p-4 z-50">
           <p className="font-semibold text-gray-900">{user.name}</p>
           <p className="text-sm text-gray-600">{user.email}</p>
-          
         </div>
       )}
     </div>
