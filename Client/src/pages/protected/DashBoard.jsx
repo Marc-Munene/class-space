@@ -60,7 +60,7 @@ const DashBoard = () => {
       </div>
 
       {/* Stat Cards */}
-      <div className="flex flex-wrap justify-center mt-5 gap-6 p-6">
+      <div className="flex flex-wrap justify-center mt-5 gap-6 p-4">
         {cardItems.map((elem, i) => (
           <div
             key={i}
