@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router";
 import { useAuthStore } from "../../store/AuthStore";
 import { useEffect, useState } from "react";
+import { Spinner } from "../../components/Spinner";
 
 const ProtectedWrapper = () => {
   const { isLoggedIn, setUser } = useAuthStore((state) => state);
@@ -40,9 +41,7 @@ const ProtectedWrapper = () => {
   return isLoggedIn ? (
     <Outlet />
   ) : isLoading ? (
-    <div className="flex items-center h-screen justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-DeepBlue"></div>
-    </div>
+    <Spinner/>
   ) : null;
 };
 
