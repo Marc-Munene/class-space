@@ -69,7 +69,7 @@ export const addBooking = async (req, res) => {
     });
   } catch (error) {
     await session.abortTransaction();
-    // console.error("Booking error:", error.message);
+    console.error("Booking error:", error.message);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to create booking",
@@ -102,6 +102,7 @@ export const editBooking = async (req, res) => {
     });
   }
 };
+
 
 //delete Booking
 export const deleteBooking = async (req, res) => {
