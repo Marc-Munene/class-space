@@ -30,6 +30,7 @@ const LoginPage = () => {
     // Basic input validation
     if (!email || !password) {
       toast.error("Please enter both email and password.");
+      setLoading(false);
       return;
     }
 
