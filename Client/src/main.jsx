@@ -11,31 +11,33 @@ import { Buildings } from "./pages/protected/Buildings";
 import { Bookings } from "./pages/protected/Bookings";
 import { Hero } from "./pages/public/Hero";
 import { LoginPage } from "./pages/Auth/LoginPage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* Global layout wrapping all routes */}
-        <Route element={<GlobalLayout />}>
-        
-          {/* public routes */}
-          <Route index element={<Hero />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUp />} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
+        <Routes>
+          {/* Global layout wrapping all routes */}
+          <Route element={<GlobalLayout />}>
+            {/* public routes */}
+            <Route index element={<Hero />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUp />} />
 
-          {/* protected routes */}
-          <Route element={<ProtectedWrapper />}>
-            <Route path="/" element={<App />}>
-              <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/buildings" element={<Buildings />} />
-              <Route path="/bookings" element={<Bookings />} />
+            {/* protected routes */}
+            <Route element={<ProtectedWrapper />}>
+              <Route path="/" element={<App />}>
+                <Route path="/dashboard" element={<DashBoard />} />
+                <Route path="/buildings" element={<Buildings />} />
+                <Route path="/bookings" element={<Bookings />} />
+              </Route>
             </Route>
-          </Route>
 
-          {/* <App /> */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            {/* <App /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </StrictMode>
 );
