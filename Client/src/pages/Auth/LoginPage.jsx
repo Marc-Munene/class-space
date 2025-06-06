@@ -4,10 +4,13 @@ import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { useAuthStore } from "../../store/AuthStore";
 import { toast } from "sonner";
+import { GoogleSignIn } from "../../components/GoogleSignIn";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuthStore();
@@ -17,19 +20,34 @@ const LoginPage = () => {
 
     // console.log("submitting ...");
 
+    setLoading(true);
+
     const formData = {
       email,
       password,
     };
 
-    const loginSuccess = await login(formData);
+    // Basic input validation
+    if (!email || !password) {
+      toast.error("Please enter both email and password.");
+      return;
+    }
 
-    if (loginSuccess) {
-      toast.success("Login Successfull");
+    try {
+      const loginSuccess = await login(formData);
 
-      navigate("/dashboard");
-    } else {
-      toast.error("Invalid credentials");
+      if (loginSuccess) {
+        toast.success("Login Successfull");
+
+        navigate("/dashboard");
+      } else {
+        toast.error("Invalid credentials");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,10 +119,20 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-base rounded-md cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md"
+            className={`bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-base rounded-md cursor-pointer transition-transform duration-300 shadow-md ${
+              loading ? "opacity-60 cursor-not-allowed" : "hover:scale-105"
+            }`}
+            disabled={loading}
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </button>
+          {/* Divider */}
+          <div className="text-center text-gray-600">or</div>
+
+          {/* Google Login */}
+          <div className="flex justify-center">
+            <GoogleSignIn />
+          </div>
         </div>
       </form>
     </div>
