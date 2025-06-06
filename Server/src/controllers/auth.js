@@ -127,6 +127,7 @@ export const googleAuth = async (req, res) => {
         googleId,
         avatar: picture,
         isVerified: true,
+        authMethod: "google",
       });
     }
 

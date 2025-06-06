@@ -8,13 +8,25 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    password: { type: String, required: true },
+    password: {
+      type: String,
+      required: function () {
+        return this.authMethod === "local";
+      },
+    },
+    authMethod: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
+    },
+    googleId: { type: String, unique: true, sparse: true },
+    avatar: String,
+    isVerified: { type: Boolean, default: false }, // optional field to track Google sign-in users
     role: {
       type: String,
       enum: ["rep", "student", "admin", "user"],
       default: "user",
     },
-    isGoogleUser: { type: Boolean, default: false }, // optional field to track Google sign-in users
   },
   {
     timestamps: true,
