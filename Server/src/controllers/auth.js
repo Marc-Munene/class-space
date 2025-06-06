@@ -1,6 +1,9 @@
 import { compare, hash } from "bcrypt";
 import { User } from "../database/models/User.js";
 import jwt from "jsonwebtoken";
+import { OAuth2Client } from "google-auth-library";
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 //singUp
 export const signUp = async (req, res) => {
@@ -87,7 +90,6 @@ export const login = async (req, res) => {
       // maxAge = how long the cookie is valid for in milliseconds
     });
 
-   
     return res.json({
       success: true,
       data: user,
@@ -97,6 +99,64 @@ export const login = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to login!",
+    });
+  }
+};
+
+// Google login
+export const googleAuth = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    //verify the google token
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, picture, sub: googleId } = payload;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Create new user if doesn't exist
+      user = await User.create({
+        name,
+        email,
+        googleId,
+        avatar: picture,
+        isVerified: true,
+      });
+    }
+
+    // Generate JWT token
+    const jwtToken = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    // Set cookie
+    res.cookie(process.env.AUTH_COOKIE_NAME, jwtToken, {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+    });
+
+    res.json({
+      success: true,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+      },
+    });
+  } catch (error) {
+    console.error("Google auth error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Google authentication failed",
     });
   }
 };
