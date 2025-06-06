@@ -14,6 +14,7 @@ const userSchema = new Schema(
       enum: ["rep", "student", "admin", "user"],
       default: "user",
     },
+    isGoogleUser: { type: Boolean, default: false }, // optional field to track Google sign-in users
   },
   {
     timestamps: true,
